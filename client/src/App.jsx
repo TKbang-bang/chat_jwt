@@ -1,14 +1,17 @@
-import React from "react";
+// App.jsx
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./views/Home.jsx";
+import Home from "./views/Home";
 import Sign from "./views/Sign";
-import axios from "axios";
-import { useEffect } from "react";
+import UsersMessages from "./views/UsersMessages";
 import api from "./services/api.js";
-import { removeAccessToken, setAccessToken } from "./services/token.service.js";
+import { setAccessToken, removeAccessToken } from "./services/token.service";
+import { SocketProvider } from "./services/socketContext.jsx";
+import axios from "axios";
+import CreateGroup from "./views/CreateGroup.jsx";
 
-axios.defaults.withCredentials = true;
 axios.defaults.baseURL = `${import.meta.env.VITE_SERVER_URL}`;
+axios.defaults.withCredentials = true;
 
 function App() {
   useEffect(() => {
@@ -31,10 +34,14 @@ function App() {
   }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/sign" element={<Sign />} />
-    </Routes>
+    <SocketProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/sign" element={<Sign />} />
+        <Route path="/user/:userId" element={<UsersMessages />} />
+        <Route path="/creategroup" element={<CreateGroup />} />
+      </Routes>
+    </SocketProvider>
   );
 }
 

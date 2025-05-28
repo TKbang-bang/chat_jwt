@@ -75,14 +75,26 @@ button:focus-visible {
 
 /* HOME */
 
-.home {
+.home,
+.principal {
   width: 100vw;
   height: 100svh;
-  padding-inline: 25rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100svh;
+  max-height: 100svh;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.home .create_group {
+  background-color: greenyellow;
+  padding: 0.1rem 0.2rem;
+  border-radius: 5rem;
 }
 
 .home .users_list {
-  width: 100%;
+  width: 35rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -120,4 +132,114 @@ button:focus-visible {
   height: 5rem;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.messages {
+  /* display: flex; */
+  /* justify-content: flex-start; */
+  /* align-items: center;
+  flex-direction: column; */
+  position: relative;
+  height: 100svh;
+  max-height: 100svh;
+  width: 35rem;
+  border: 1px solid #000;
+}
+
+.messages .header {
+  border: 1px solid #000;
+  background-color: greenyellow;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 1rem;
+  position: absolute;
+  width: 100%;
+  height: 5rem;
+}
+.messages .header span {
+  width: fit-content;
+  background-color: blue;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.messages .header span svg {
+  width: 2rem;
+  height: 2rem;
+  fill: #fff;
+}
+
+.messages .header img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.messages form {
+  width: fit-content;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+.messages form input {
+  width: 25rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  padding-inline: 0.5rem;
+}
+
+.messages .messages_container {
+  width: 100%;
+  height: 100svh;
+  max-height: 100svh;
+  overflow-y: scroll;
+  padding-block: 6rem;
+  padding-inline: 2rem;
+}
+
+.messages .messages_container .messages_list {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.messages .messages_container .messages_list .message {
+  /* border: 1px solid #000; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0.5rem;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  /* background: #; */
+  background-color: greenyellow;
+  max-width: 20rem;
+}
+
+.messages .messages_container .messages_list .message .date {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  text-align: left;
+}
+
+.messages .messages_container .messages_list .message.right .date {
+  text-align: right;
+}
+.messages .messages_container .messages_list .right {
+  align-self: flex-end;
+  justify-self: flex-end;
 }

@@ -25,6 +25,9 @@ function Home() {
   return (
     <div className="home">
       <h1>Home</h1>
+      <Link to="/creategroup" className="create_group">
+        Create group
+      </Link>
 
       <ul className="users_list">
         {users.map((user) => (

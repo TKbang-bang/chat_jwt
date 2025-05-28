@@ -1,8 +1,8 @@
 import axios from "axios";
 import {
   getAccessToken,
-  removeAccessToken,
   setAccessToken,
+  removeAccessToken,
 } from "./token.service.js";
 
 const api = axios.create({
@@ -10,21 +10,18 @@ const api = axios.create({
   withCredentials: true,
 });
 
-api.interceptors.request.use(
-  async (config) => {
-    const token = getAccessToken();
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+api.interceptors.request.use((config) => {
+  const token = getAccessToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 api.interceptors.response.use(
   (response) => {
-    const newAccessToken = response.headers["access-token"]?.split(" ")[1];
-    if (newAccessToken) setAccessToken(newAccessToken);
+    const newToken = response.headers["access-token"]?.split(" ")[1];
+    if (newToken) setAccessToken(newToken);
     return response;
   },
   async (error) => {
@@ -34,14 +31,13 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const retryResponse = await api(originalRequest);
-        return retryResponse;
-      } catch (retryError) {
-        if (window.location.pathname !== "/sign")
-          window.location.href = "/sign";
+        const retry = await api(originalRequest);
+        return retry;
+      } catch (e) {
         removeAccessToken();
-
-        return Promise.reject(retryError);
+        if (window.location.pathname !== "/sign") {
+          window.location.href = "/sign";
+        }
       }
     }
 

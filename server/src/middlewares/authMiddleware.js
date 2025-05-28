@@ -33,6 +33,7 @@ const authMiddleware = async (req, res, next) => {
 
       // saving the user ID in the request
       req.userID = data.userID;
+      req.accessToken = newAccessToken;
       // passing the request to the next middleware
       return next();
     } catch (error) {
@@ -46,6 +47,7 @@ const authMiddleware = async (req, res, next) => {
 
     // saving the user ID in the request
     req.userID = data.userID;
+    req.accessToken = accessToken;
     // passing the request to the next middleware
     return next();
   } catch (error) {
