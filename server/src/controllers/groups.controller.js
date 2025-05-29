@@ -1,4 +1,7 @@
-import { creatingGroup } from "../services/group.service.js";
+import {
+  creatingGroup,
+  gettingGroupMessages,
+} from "../services/group.service.js";
 
 export const createGroup = async (req, res) => {
   try {
@@ -17,6 +20,20 @@ export const createGroup = async (req, res) => {
         .json({ ok: false, message: result.message });
 
     return res.json({ ok: true });
+  } catch (error) {
+    return res.status(500).json({ ok: false, message: "Server error" });
+  }
+};
+
+export const getGroupMessages = async (req, res) => {
+  try {
+    const result = await gettingGroupMessages(req.params.groupId);
+
+    return res.json({
+      ok: true,
+      messages: result.messages,
+      group: result.group,
+    });
   } catch (error) {
     return res.status(500).json({ ok: false, message: "Server error" });
   }

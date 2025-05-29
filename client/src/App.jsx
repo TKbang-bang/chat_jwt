@@ -9,6 +9,7 @@ import { setAccessToken, removeAccessToken } from "./services/token.service";
 import { SocketProvider } from "./services/socketContext.jsx";
 import axios from "axios";
 import CreateGroup from "./views/CreateGroup.jsx";
+import GroupMessages from "./views/GroupMessages.jsx";
 
 axios.defaults.baseURL = `${import.meta.env.VITE_SERVER_URL}`;
 axios.defaults.withCredentials = true;
@@ -39,6 +40,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/sign" element={<Sign />} />
         <Route path="/user/:userId" element={<UsersMessages />} />
+        <Route path="/group/:groupId" element={<GroupMessages />} />
         <Route path="/creategroup" element={<CreateGroup />} />
       </Routes>
     </SocketProvider>

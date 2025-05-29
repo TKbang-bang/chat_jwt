@@ -17,7 +17,8 @@ function UsersMessages() {
 
     socket.on("to_user_message_server", (data) => {
       if (data.to_user_id === userId || data.from_user_id === userId) {
-        data.created_at.replace(" ", "T");
+        const fixedDate = data.created_at.replace(" ", "T");
+        data.created_at = new Date(fixedDate).toTimeString().slice(0, 8);
 
         setMessages((messages) => [...messages, data]);
       }
