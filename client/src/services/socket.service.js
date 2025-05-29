@@ -1,6 +1,5 @@
 import { io } from "socket.io-client";
 import api from "./api";
-import { getAccessToken } from "./token.service";
 
 const socketService = async () => {
   try {

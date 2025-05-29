@@ -3,11 +3,13 @@ import bcrypt from "bcrypt";
 
 export const gettingUserByEmail = async (email) => {
   try {
+    // getting the user by email
     const [user] = await pool.query(
       "SELECT * FROM users WHERE user_email = ?",
       [email]
     );
 
+    // returning the user
     return user;
   } catch (error) {
     throw new Error(error);
@@ -16,7 +18,7 @@ export const gettingUserByEmail = async (email) => {
 
 export const creatingUser = async (name, email, password) => {
   try {
-    // user id
+    // creating the user id
     const userId = crypto.randomUUID();
     // hashed password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,6 +32,7 @@ export const creatingUser = async (name, email, password) => {
     if (user.affectedRows === 0)
       return { ok: false, message: "Error creating user" };
 
+    // returning the user
     return { ok: true };
   } catch (error) {
     throw new Error(error);

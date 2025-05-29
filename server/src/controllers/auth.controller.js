@@ -22,7 +22,6 @@ export const signUp = async (req, res) => {
     // sending the response
     return res.json({ ok: true, message: "User created successfully" });
   } catch (error) {
-    console.log(error);
     return res.json({ ok: false, message: "Server error" });
   }
 };
@@ -57,7 +56,6 @@ export const login = async (req, res) => {
       })
       .json({ ok: true, accessToken });
   } catch (error) {
-    console.log(error);
     return res.json({ ok: false, message: "Server error" });
   }
 };

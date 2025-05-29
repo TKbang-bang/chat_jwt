@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { createAccessToken, createRefreshToken } from "../utils/token.js";
 
 const authMiddleware = async (req, res, next) => {
+  // getting the tokens from the request headers and the cookies
   const accessToken = req.headers.authorization?.split(" ")[1];
   const refreshToken = req.cookies.refreshToken;
 
@@ -31,7 +32,7 @@ const authMiddleware = async (req, res, next) => {
       });
       res.setHeader("access-token", `Bearer ${newAccessToken}`);
 
-      // saving the user ID in the request
+      // saving the user ID and the new access token in the request
       req.userID = data.userID;
       req.accessToken = newAccessToken;
       // passing the request to the next middleware
@@ -45,7 +46,7 @@ const authMiddleware = async (req, res, next) => {
     // verify the access token
     const data = await jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET);
 
-    // saving the user ID in the request
+    // saving the user ID and the access token in the request
     req.userID = data.userID;
     req.accessToken = accessToken;
     // passing the request to the next middleware

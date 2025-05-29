@@ -16,11 +16,13 @@ function Home() {
     if (!socket) return;
 
     socket.on("join_group_server", (data) => {
-      if (!data.ok) console.log(data.message);
-
-      setGroupName("");
-      setGroupPassword("");
-      navigate("/group/" + data.group_id);
+      if (!data.ok) {
+        return alert(data.message);
+      } else {
+        setGroupName("");
+        setGroupPassword("");
+        navigate("/group/" + data.group_id);
+      }
     });
   }, [socket]);
 

@@ -1,4 +1,5 @@
 export const signupValidation = (req, res, next) => {
+  // credentials from the client
   const { name, email, password } = req.body;
 
   // check if all fields are present
@@ -37,6 +38,7 @@ export const signupValidation = (req, res, next) => {
       .json({ ok: false, message: "Password must be at least 6 characters" });
   }
 
+  // passing to the next middleware
   next();
 };
 
@@ -72,5 +74,6 @@ export const loginValidation = (req, res, next) => {
       .json({ ok: false, message: "Password must be at least 6 characters" });
   }
 
+  // passing to the next middleware
   next();
 };
